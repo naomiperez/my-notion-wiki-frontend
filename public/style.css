@@ -1,0 +1,73 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  position: relative;
+}
+
+#banner {
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ef4444;
+  color: white;
+  font-weight: bold;
+}
+
+#container {
+  width: 80vw;
+  margin: auto;
+}
+
+#login {
+  
+}
+
+#loading {
+  width: 4rem;
+  height: 4rem;
+  border: 12px solid #f3f3f3;
+  border-top: 13px solid #9c41f2;
+  border-radius: 100%;
+  margin: auto;
+  margin-top: 4rem;
+  visibility: hidden;
+  animation: spin 1s infinite linear;
+}
+
+#loading.display {
+  visibility: visible;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+.node {
+  cursor: pointer;
+  font: 14px Verdana, sans-serif;
+  font-family: monospace;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
