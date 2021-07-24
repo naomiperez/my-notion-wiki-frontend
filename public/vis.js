@@ -1,17 +1,23 @@
 const loader = document.querySelector("#loading");
 const loadingEnded = false;
 
-
-
 /* ------------------------------ Fetching data ------------------------------ */
 const getDataFromBackend = async () => {
-    // Call my express api
-    const rest = await fetch("https://my-notion-wiki.herokuapp.com/child_pages");
-    return rest;
+    // Call my express api (or localhost during testing)
+    const jsonResponseObj = await fetch("https://my-notion-wiki.herokuapp.com/child_pages",
+    { 
+        mode: 'no-cors',
+    });
+    const res = await jsonResponseObj.json().catch((error) => {
+        console.log("json error");
+    });
+    return res;
 };
 
 async function getJson() {
-    const res = await getDataFromBackend();
+    const res = await getDataFromBackend().catch((error) => {
+        console.log(error);
+    });
     const jsonTree = res.jsonTree;
     return jsonTree;
 }
@@ -58,9 +64,10 @@ createD3Vis = async () => {
     /* ------------------------------ get Data ------------------------------ */
     const jsonHierarchy = await getDataFromBackend();
 
-    console.log(`Vis.js JSON Loaded: ${JSON.stringify(jsonHierarchy)}`);
+    console.log(`jsonHierarchy:`)
+    console.log(jsonHierarchy);
 
-    d3.json("../tempData/data.json", function (error, flare) {
+    jsonHierarchy.map(function (flare) {
         root = flare;
         root.x0 = height / 2;
         root.y0 = 0;
